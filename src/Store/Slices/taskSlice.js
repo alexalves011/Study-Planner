@@ -10,6 +10,7 @@ const taskSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
+    // Reducers: Funções que ditam as regras de COMO o estado deve ser alterado a partir de uma ação.
     addTask: (state, action) => {
       const taskWithId = {
         ...action.payload,

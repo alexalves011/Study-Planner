@@ -1,5 +1,6 @@
+// Importações
+
 import { useState } from "react";
-import { useTasks } from "../contexts/TaskContext";
 import { useTheme } from "../contexts/ThemeContext";
 import { EmptyState, ThemeToggle } from "../components/UI";
 import { AddTaskModal, EditTaskModal } from "../components/Modal";
@@ -13,16 +14,18 @@ import {
   selectPendingTasks,
   selectTasks,
   toggleTaskComplete,
-} from "../Store/Slices/taskSlice";
+} from "../Store/Slices/taskSlice"; // importações da funçoes de Reducers
 
 function StudyPlannerPage() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); // const dispatch e o valor como se fosse um parametro da variavel uma função de dispatch
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const tasks = useSelector(selectTasks);
   const pendingTasks = useSelector(selectPendingTasks);
   const completedTasks = useSelector(selectCompletedTasks);
   const [taskToEdit, setTaskToEdit] = useState(null);
+
+  // Funçoes para Abrir e Fechar a Modal, estado Local não utilizamos dispatch
 
   const handleAddTask = () => {
     setIsModalOpen(true);
@@ -32,13 +35,19 @@ function StudyPlannerPage() {
     setIsModalOpen(false);
   };
 
+  // -----------------------------------------------------------------------------
+
+  // função para add task com a função de disparo do reducer
   const handleAddNewTask = (newTask) => {
-    dispatch(addTask(newTask)) 
+    dispatch(addTask(newTask));
   };
 
+  // função para completar task com a função de disparo do reducer
   const handleToggleComplete = (taskId) => {
     dispatch(toggleTaskComplete(taskId));
   };
+
+  // função para preparar o terreno da edição de task
 
   const handleEditTask = (taskId) => {
     const task = tasks.find((t) => t.id === taskId);
@@ -46,18 +55,26 @@ function StudyPlannerPage() {
     setIsEditModalOpen(true);
   };
 
+  // responsável por fechar a modal de edição
+
   const handleCloseEditModal = () => {
     setIsEditModalOpen(false);
     setTaskToEdit(null);
   };
 
+  // salvar a edição da task
+
   const handleSaveEditTask = (taskId, updatedTask) => {
-    dispatch(editTask({taskId, updatedTask}));
+    dispatch(editTask({ taskId, updatedTask }));
   };
 
+  // função para excluir task
+
   const handleDeleteTask = (taskId) => {
-   dispatch(deleteTask(taskId)) 
+    dispatch(deleteTask(taskId));
   };
+
+  // função altera thema
 
   const theme = useTheme();
 
