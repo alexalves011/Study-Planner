@@ -1,19 +1,16 @@
-import { TaskProvider } from './contexts/TaskContext'
-import { ThemeProvider } from './contexts/ThemeContext'
-import StudyPlannerPage from './pages/StudyPlannerPage'
-import { store } from './Store'
-import {Provider} from 'react-redux'
+import { ThemeProvider } from "./contexts/ThemeContext";
+import StudyPlannerPage from "./pages/StudyPlannerPage";
+import { store } from "./Store";
+import { Provider } from "react-redux";
 
 function App() {
   return (
     <Provider store={store}>
-    <ThemeProvider>
-      <TaskProvider>
+      <ThemeProvider>
         <StudyPlannerPage />
-      </TaskProvider>
-    </ThemeProvider>
+      </ThemeProvider>
     </Provider>
-  )
+  );
 }
 
-export default App
+export default App;
